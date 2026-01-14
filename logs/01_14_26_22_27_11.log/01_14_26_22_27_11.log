@@ -1,0 +1,4 @@
+[2026-01-14 22:27:12,316] root - INFO - Data Ingestion method starts
+[2026-01-14 22:27:12,329] root - INFO - Dataset read as pandas Dataframe
+[2026-01-14 22:27:12,335] root - INFO - Train test split
+[2026-01-14 22:27:12,344] root - INFO - Ingestion of data is completed
