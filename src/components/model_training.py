@@ -8,6 +8,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import GridSearchCV
+from src.utils import evaluate_model
 # from src.components.Data_transformation import DataTransformation
 
 from dataclasses import dataclass
@@ -55,11 +57,26 @@ class ModelTrainer:
                     "C": [0.1, 1, 10],
                     "kernel": ["linear", "rbf"]
                 },
-                "KNN": {
+                "K-Nearest Neighbors": {
                     "n_neighbors": [3, 5, 7, 9],
                     "weights": ["uniform", "distance"]
                 }
             }
+            report, best_models = evaluate_model(X_train, y_train, X_test, y_test,models,param_grids)
+
+            print("Model Evaluation Report:")
+            for model_name, accuracy in report.items():
+                print(f"{model_name} : {accuracy}")
+
+            print('\n====================================================================================\n')
+
+            logging.info("Model Evaluation Report:")
+            for model_name, accuracy in report.items():
+                logging.info(f"{model_name} : {accuracy}")
+
+
+
+
 
         
         except Exception as e:
