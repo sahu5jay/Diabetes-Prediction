@@ -11,12 +11,12 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 # from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-# from src.utils import save_object
+from src.utils import save_object
 from dataclasses import dataclass
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file = os.path.join('artifacts/notebook','preprocessor.pkl')
+    preprocessor_obj_file = os.path.join('artifacts','preprocessor.pkl')
 
 class DataTransformation:
     def __init__(self):
@@ -98,10 +98,10 @@ class DataTransformation:
 
 
             logging.info("saving the preprocessor file to")
-            # save_object(
-            #     file_path = self.data_transformation.preprocessor_obj_file,
-            #     obj = preprocessor_obj
-            # )
+            save_object(
+                file_path = self.data_transformation.preprocessor_obj_file,
+                obj = preprocessor_obj
+            )
 
         
             logging.info("returning the trainarr, test arr preprocessor pickel file")

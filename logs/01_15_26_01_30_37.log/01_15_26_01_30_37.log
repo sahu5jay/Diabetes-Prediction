@@ -1,0 +1,20 @@
+[2026-01-15 01:30:38,599] root - INFO - Data Ingestion method starts
+[2026-01-15 01:30:38,609] root - INFO - Dataset read as pandas Dataframe
+[2026-01-15 01:30:38,615] root - INFO - Train test split
+[2026-01-15 01:30:38,626] root - INFO - Ingestion of data is completed
+[2026-01-15 01:30:38,626] root - INFO - fetch the path og the train and test data 
+[2026-01-15 01:30:38,631] root - INFO - train and test data is converted to data frame
+[2026-01-15 01:30:38,631] root - INFO - Data transformation initated
+[2026-01-15 01:30:38,633] root - INFO - raw Data converted to data frame from artifacts
+[2026-01-15 01:30:38,636] root - INFO - returning the preprocessor pipeline
+[2026-01-15 01:30:38,636] root - INFO - preprocessor object collected
+[2026-01-15 01:30:38,636] root - INFO - seperated input feature and target feature from train dataset
+[2026-01-15 01:30:38,637] root - INFO - seperated input feature and target feature from test dataset
+[2026-01-15 01:30:38,637] root - INFO - fit transform on the trining data set
+[2026-01-15 01:30:38,649] root - INFO - transform on the test data set
+[2026-01-15 01:30:38,653] root - INFO - concatinating training feature and target data set 
+[2026-01-15 01:30:38,653] root - INFO - concatinating test feature and target data set 
+[2026-01-15 01:30:38,653] root - INFO - saving the preprocessor file to
+[2026-01-15 01:30:38,653] root - INFO - extracting the path to save the model..
+[2026-01-15 01:30:38,653] root - INFO - creating the directory inside the artifacts
+[2026-01-15 01:30:38,653] root - INFO - Exception occured while saving the model
