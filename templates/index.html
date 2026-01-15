@@ -89,7 +89,7 @@
     <!-- ================= REAL TIME PREDICTION ================= -->
     <h2>Real-Time Prediction</h2>
 
-    <form action="/predict" method="post">
+    <form action="{{ url_for('predict_datapoint')}}" method="post">
         <div class="form-group">
             <label>Pregnancies</label>
             <input type="text" name="pregnancies" required>
@@ -133,9 +133,12 @@
         <button type="submit">Predict Diabetes</button>
     </form>
 
-    {% if prediction_text %}
-        <div class="result">{{ final_result }}</div>
+    {% if final_result %}
+    <div class="result">
+        Prediction Result: {{ final_result }}
+    </div>
     {% endif %}
+
 
     <hr>
 
@@ -162,6 +165,8 @@
             </button>
         </form>
     {% endif %}
+
+    
 
 </div>
 

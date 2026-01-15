@@ -60,14 +60,14 @@ class CustomData:
         try:
             logging.info("convertig the custom data to dictionary...")
             custom_data_input_dict = {
-                'pregnancies':[self.pregnancies],
-                'glucose':[self.glucose],
-                'blood_pressure':[self.blood_pressure],
-                'skin_thickness':[self.skin_thickness],
-                'insulin':[self.insulin],
-                'bmi':[self.bmi],
+                'Pregnancies':[self.pregnancies],
+                'Glucose':[self.glucose],
+                'BloodPressure':[self.blood_pressure],
+                'SkinThickness':[self.skin_thickness],
+                'Insulin':[self.insulin],
+                'BMI':[self.bmi],
                 'diabetes_pedigree_function':[self.diabetes_pedigree_function],
-                'age':[self.age]
+                'Age':[self.age]
             }
             logging.info("custom data converted to dictionary")
             df = pd.DataFrame(custom_data_input_dict)
