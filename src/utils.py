@@ -81,3 +81,4 @@ def load_object(file_path):
     except Exception as e:
         logging.info('Exception Occured in load_object function utils')
         raise CustomException(e,sys)
+    
