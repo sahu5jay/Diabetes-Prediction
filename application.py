@@ -97,8 +97,17 @@ def download_predictions():
     file_path = "artifacts/batch_predictions.csv"
     return send_file(file_path, as_attachment=True)
 
+@app.route('/download/train')
+def download_train():
+    return send_file('artifacts/train.csv', as_attachment=True)
 
-    
+@app.route('/download/test')
+def download_test():
+    return send_file('artifacts/test.csv', as_attachment=True)
+
+@app.route('/download/model')
+def download_model():
+    return send_file('artifacts/model.joblib', as_attachment=True)    
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',debug=True)

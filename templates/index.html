@@ -5,169 +5,74 @@
     <title>PIMA Diabetes Prediction</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: #2c3e50;
-        }
-
-        hr {
-            margin: 35px 0;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="file"] {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #3498db;
-            border: none;
-            color: #fff;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #2980b9;
-        }
-
-        .result {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: #27ae60;
-        }
-
-        .download-btn {
-            margin-top: 15px;
-            background: #2ecc71;
-        }
-
-        .download-btn:hover {
-            background: #27ae60;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
 <div class="container">
-
     <h1>PIMA Diabetes Prediction System</h1>
 
-    <!-- ================= REAL TIME PREDICTION ================= -->
-    <h2>Real-Time Prediction</h2>
+    <div class="split-container">
 
-    <form action="{{ url_for('predict_datapoint')}}" method="post">
-        <div class="form-group">
-            <label>Pregnancies</label>
-            <input type="text" name="pregnancies" required>
+        <!-- REAL TIME PREDICTION -->
+        <div class="card">
+            <h2>Real-Time Prediction</h2>
+
+            <form action="{{ url_for('predict_datapoint') }}" method="post" class="grid-form">
+
+                <input type="text" name="pregnancies" placeholder="Pregnancies" required>
+                <input type="text" name="glucose" placeholder="Glucose" required>
+
+                <input type="text" name="blood_pressure" placeholder="Blood Pressure" required>
+                <input type="text" name="skin_thickness" placeholder="Skin Thickness" required>
+
+                <input type="text" name="insulin" placeholder="Insulin" required>
+                <input type="text" name="bmi" placeholder="BMI" required>
+
+                <input type="text" name="diabetes_pedigree_function" placeholder="Diabetes Pedigree Function" required>
+                <input type="text" name="age" placeholder="Age" required>
+
+                <button type="submit" class="full-width">Predict</button>
+            </form>
+
+            {% if final_result %}
+                <div class="result">{{ final_result }}</div>
+            {% endif %}
         </div>
 
-        <div class="form-group">
-            <label>Glucose</label>
-            <input type="text" name="glucose" required>
+        <!-- BATCH PREDICTION -->
+        <div class="card">
+            <h2>Batch Prediction</h2>
+
+            <form action="/batch_predict" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".csv" required>
+                <button type="submit">Run Batch Prediction</button>
+            </form>
+
+            {% if batch_message %}
+                <div class="result">{{ batch_message }}</div>
+            {% endif %}
+
+            {% if download_ready %}
+                <a href="/download_predictions" class="btn success">
+                    Download Predictions CSV
+                </a>
+            {% endif %}
+
+            <hr>
+
+            <h3>Downloads</h3>
+            <a href="/download/train" class="btn">Download Train CSV</a>
+            <a href="/download/test" class="btn">Download Test CSV</a>
+            <a href="/download/model" class="btn warning">Download Model (.joblib)</a>
         </div>
 
-        <div class="form-group">
-            <label>Blood Pressure</label>
-            <input type="text" name="blood_pressure" required>
-        </div>
-
-        <div class="form-group">
-            <label>Skin Thickness</label>
-            <input type="text" name="skin_thickness" required>
-        </div>
-
-        <div class="form-group">
-            <label>Insulin</label>
-            <input type="text" name="insulin" required>
-        </div>
-
-        <div class="form-group">
-            <label>BMI</label>
-            <input type="text" step="0.1" name="bmi" required>
-        </div>
-
-        <div class="form-group">
-            <label>Diabetes Pedigree Function</label>
-            <input type="text" step="0.01" name="diabetes_pedigree_function" required>
-        </div>
-
-        <div class="form-group">
-            <label>Age</label>
-            <input type="text" name="age" required>
-        </div>
-
-        <button type="submit">Predict Diabetes</button>
-    </form>
-
-    {% if final_result %}
-    <div class="result">
-        Prediction Result: {{ final_result }}
     </div>
-    {% endif %}
-
-
-    <hr>
-
-    <!-- ================= BATCH PREDICTION ================= -->
-    <h2>Batch Prediction (Upload CSV)</h2>
-
-    <form action="/batch_predict" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label>Upload CSV File</label>
-            <input type="file" name="file" accept=".csv" required>
-        </div>
-
-        <button type="submit">Run Batch Prediction</button>
-    </form>
-
-    {% if batch_message %}
-        <div class="result">{{ batch_message }}</div>
-    {% endif %}
-
-    {% if download_ready %}
-        <form action="/download_predictions" method="get">
-            <button class="download-btn" type="submit">
-                Download CSV with Predictions
-            </button>
-        </form>
-    {% endif %}
-
-    
-
+    <div class="card-footer">
+        © 2026 Jay Sahu |
+        <a href="mailto:jsahu0523@example.com">jsahu0523@example.com</a>
+    </div>
 </div>
 
 </body>
